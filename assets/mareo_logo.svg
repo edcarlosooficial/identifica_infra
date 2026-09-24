@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180">
+<g transform="translate(20 15)"><line x1="70" y1="15" x2="70" y2="120" stroke="#1F5E8C" stroke-width="6"/><polygon points="64,22 18,106 64,96" fill="#22B8C7"/><polygon points="78,22 132,102 78,92" fill="#4CA7D8"/><polygon points="18,112 134,112 114,134 43,134" fill="#B58A45"/></g>
+<text x="180" y="85" font-family="Arial" font-size="58" font-weight="700" fill="#0B1F33">MAREO</text>
+<text x="183" y="124" font-family="Arial" font-size="25" font-weight="700" fill="#247C78">TECNOLOGIA</text>
+<text x="183" y="153" font-family="Arial" font-size="16" font-style="italic" fill="#677784">Navegando nas águas da informação</text>
+</svg>
