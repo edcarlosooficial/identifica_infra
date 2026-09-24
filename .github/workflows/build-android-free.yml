@@ -1,0 +1,36 @@
+name: Build Android FREE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'android-app/**'
+      - '.github/workflows/build-android-free.yml'
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build APK
+        run: gradle :app:assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mareo_Identifica_Infra_FREE_Android_APK
+          path: android-app/app/build/outputs/apk/debug/app-debug.apk
