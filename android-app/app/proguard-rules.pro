@@ -1,0 +1,1 @@
+-keep class br.com.mareotech.identificainfra.free.** { *; }
