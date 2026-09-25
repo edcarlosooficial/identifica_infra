@@ -1,0 +1,24 @@
+name: MareoIdentificaInfraFREE
+options:
+  bundleIdPrefix: br.com.mareotech
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+targets:
+  MareoIdentificaInfraFREE:
+    type: application
+    platform: iOS
+    sources:
+      - .
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: br.com.mareotech.identificainfra.free
+        PRODUCT_NAME: Mareo Identifica Infra FREE
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Mareo Infra FREE
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: O aplicativo testa somente hosts e portas informados pelo usuario em redes autorizadas.
+        CODE_SIGN_STYLE: Automatic
+    scheme:
+      testTargets: []
