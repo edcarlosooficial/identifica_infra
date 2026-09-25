@@ -1,0 +1,52 @@
+name: Build Apple FREE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'mareo_mapper.py'
+      - 'requirements.txt'
+      - 'build_macos.sh'
+      - 'ios/**'
+      - '.github/workflows/build-apple-free.yml'
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build macOS
+        run: |
+          chmod +x build_macos.sh
+          ./build_macos.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mareo_Identifica_Infra_FREE_macOS
+          path: dist/mareo-identifica-infra-free-macos
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+      - name: Build iOS Simulator app
+        working-directory: ios
+        run: |
+          xcodebuild             -project MareoIdentificaInfraFREE.xcodeproj             -scheme MareoIdentificaInfraFREE             -configuration Release             -sdk iphonesimulator             -derivedDataPath build             CODE_SIGNING_ALLOWED=NO             build
+      - name: Package simulator app
+        working-directory: ios
+        run: |
+          cd build/Build/Products/Release-iphonesimulator
+          ditto -c -k --sequesterRsrc --keepParent "Mareo Identifica Infra FREE.app" Mareo_Identifica_Infra_FREE_iOS_Simulator.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mareo_Identifica_Infra_FREE_iOS_Simulator
+          path: ios/build/Build/Products/Release-iphonesimulator/Mareo_Identifica_Infra_FREE_iOS_Simulator.zip
